@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamad Irfan Manaf - Weather Landing Page</title>
+    <title>Mohamad Irfan Manaf</title>
     <style>
         * {
             margin: 0;
@@ -268,6 +268,313 @@
             animation: pulse 1.5s ease-in-out infinite;
         }
 
+        /* Calendar Toggle Button */
+        .calendar-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 101;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 1s ease-out 1.2s backwards;
+        }
+
+        .calendar-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .calendar-toggle svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Calendar Container */
+        .calendar-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            z-index: 102;
+            max-width: 450px;
+            width: 90%;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .calendar-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .calendar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 101;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .calendar-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            line-height: 1;
+        }
+
+        .calendar-close:hover {
+            background: rgba(255, 0, 0, 0.4);
+            transform: rotate(90deg);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .calendar-header h3 {
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .calendar-nav button:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.15);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 8px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            font-weight: 500;
+        }
+
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.15);
+            z-index: 10;
+        }
+
+        .calendar-day.today {
+            background: rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .calendar-day.holiday {
+            background: rgba(255, 50, 50, 0.4);
+            border: 2px solid rgba(255, 50, 50, 0.7);
+        }
+
+        .calendar-day.holiday.today {
+            background: rgba(255, 100, 100, 0.5);
+            border: 2px solid rgba(255, 200, 0, 0.9);
+            box-shadow: 0 0 25px rgba(255, 200, 0, 0.7);
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .calendar-day.other-month:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+        }
+
+        .holiday-indicator {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+            width: 7px;
+            height: 7px;
+            background: #ff4444;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: scale(1.3);
+                opacity: 0.7;
+            }
+        }
+
+        .holiday-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        .holiday-info h4 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+
+        .holiday-item {
+            font-size: 0.85rem;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            background: rgba(255, 50, 50, 0.25);
+            border-radius: 8px;
+            border-left: 4px solid rgba(255, 50, 50, 0.7);
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .holiday-item:hover {
+            background: rgba(255, 50, 50, 0.35);
+            transform: translateX(5px);
+        }
+
+        .holiday-date {
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Scrollbar styling */
+        .holiday-info::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .holiday-info::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .holiday-info::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+        }
+
+        .holiday-info::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .name {
@@ -278,6 +585,26 @@
             }
             .temperature {
                 font-size: 2rem;
+            }
+            .calendar-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+            .calendar-toggle svg {
+                width: 25px;
+                height: 25px;
+            }
+            .calendar-container {
+                width: 95%;
+                padding: 20px;
+            }
+            .calendar-header h3 {
+                font-size: 1.2rem;
+            }
+            .calendar-day {
+                font-size: 0.85rem;
             }
         }
     </style>
@@ -308,10 +635,43 @@
 
     <!-- Content -->
     <div class="content">
-        <h1 class="name">MOHAMAD IRFAN MANAF</h1>
+        <h1 class="name">You Suffer?! But Why?!!</h1>
         <div class="weather-info" id="weather-info">
             <div class="loading">Memuat cuaca...</div>
         </div>
+    </div>
+
+    <!-- Calendar Toggle Button -->
+    <div class="calendar-toggle" id="calendar-toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 4H7v5h5v-5z"/>
+        </svg>
+    </div>
+
+    <!-- Calendar Overlay -->
+    <div class="calendar-overlay" id="calendar-overlay"></div>
+
+    <!-- Calendar -->
+    <div class="calendar-container" id="calendar-container">
+        <button class="calendar-close" id="calendar-close">×</button>
+        <div class="calendar-header">
+            <h3 id="calendar-month-year"></h3>
+            <div class="calendar-nav">
+                <button id="prev-month">‹</button>
+                <button id="next-month">›</button>
+            </div>
+        </div>
+        <div class="calendar-weekdays">
+            <div class="calendar-weekday">Min</div>
+            <div class="calendar-weekday">Sen</div>
+            <div class="calendar-weekday">Sel</div>
+            <div class="calendar-weekday">Rab</div>
+            <div class="calendar-weekday">Kam</div>
+            <div class="calendar-weekday">Jum</div>
+            <div class="calendar-weekday">Sab</div>
+        </div>
+        <div class="calendar-days" id="calendar-days"></div>
+        <div class="holiday-info" id="holiday-info"></div>
     </div>
 
     <script>
@@ -469,8 +829,274 @@
             }
         }
 
+        // Indonesian National Holidays (Multi-year data)
+        const holidaysData = {
+            '2024': {
+                '2024-01-01': 'Tahun Baru Masehi',
+                '2024-02-08': 'Isra Mikraj Nabi Muhammad SAW',
+                '2024-02-10': 'Tahun Baru Imlek 2575 Kongzili',
+                '2024-03-11': 'Hari Suci Nyepi Tahun Baru Saka 1946',
+                '2024-03-29': 'Wafat Isa Al Masih',
+                '2024-03-31': 'Paskah',
+                '2024-04-08': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
+                '2024-04-09': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
+                '2024-04-10': 'Hari Raya Idul Fitri 1445 H',
+                '2024-04-11': 'Hari Raya Idul Fitri 1445 H',
+                '2024-04-12': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
+                '2024-04-15': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
+                '2024-05-01': 'Hari Buruh Internasional',
+                '2024-05-09': 'Kenaikan Isa Al Masih',
+                '2024-05-10': 'Kenaikan Isa Al Masih (Cuti Bersama)',
+                '2024-05-23': 'Hari Raya Waisak 2568',
+                '2024-05-24': 'Hari Raya Waisak 2568 (Cuti Bersama)',
+                '2024-06-01': 'Hari Lahir Pancasila',
+                '2024-06-17': 'Hari Raya Idul Adha 1445 H',
+                '2024-06-18': 'Hari Raya Idul Adha 1445 H (Cuti Bersama)',
+                '2024-07-07': 'Tahun Baru Islam 1446 H',
+                '2024-08-17': 'Hari Kemerdekaan RI',
+                '2024-09-16': 'Maulid Nabi Muhammad SAW',
+                '2024-12-25': 'Hari Raya Natal',
+                '2024-12-26': 'Hari Raya Natal (Cuti Bersama)'
+            },
+            '2025': {
+                '2025-01-01': 'Tahun Baru Masehi',
+                '2025-01-29': 'Tahun Baru Imlek 2576 Kongzili',
+                '2025-03-29': 'Hari Suci Nyepi Tahun Baru Saka 1947',
+                '2025-03-31': 'Isra Mikraj Nabi Muhammad SAW',
+                '2025-04-18': 'Wafat Isa Al Masih',
+                '2025-04-20': 'Paskah',
+                '2025-05-01': 'Hari Buruh Internasional',
+                '2025-05-12': 'Kenaikan Isa Al Masih',
+                '2025-05-29': 'Hari Raya Waisak 2569',
+                '2025-06-01': 'Hari Lahir Pancasila',
+                '2025-06-02': 'Hari Raya Idul Fitri 1446 H (Cuti Bersama)',
+                '2025-06-03': 'Hari Raya Idul Fitri 1446 H',
+                '2025-06-04': 'Hari Raya Idul Fitri 1446 H',
+                '2025-06-05': 'Hari Raya Idul Fitri 1446 H (Cuti Bersama)',
+                '2025-06-06': 'Hari Raya Idul Fitri 1446 H (Cuti Bersama)',
+                '2025-08-17': 'Hari Kemerdekaan RI',
+                '2025-09-06': 'Hari Raya Idul Adha 1446 H',
+                '2025-09-27': 'Tahun Baru Islam 1447 H',
+                '2025-12-06': 'Maulid Nabi Muhammad SAW',
+                '2025-12-25': 'Hari Raya Natal',
+                '2025-12-26': 'Hari Raya Natal (Cuti Bersama)'
+            },
+            '2026': {
+                '2026-01-01': 'Tahun Baru Masehi',
+                '2026-01-18': 'Tahun Baru Imlek 2577 Kongzili',
+                '2026-03-19': 'Hari Suci Nyepi Tahun Baru Saka 1948',
+                '2026-03-20': 'Isra Mikraj Nabi Muhammad SAW',
+                '2026-04-03': 'Wafat Isa Al Masih',
+                '2026-04-05': 'Paskah',
+                '2026-05-01': 'Hari Buruh Internasional',
+                '2026-05-14': 'Kenaikan Isa Al Masih',
+                '2026-05-18': 'Hari Raya Waisak 2570',
+                '2026-05-22': 'Hari Raya Idul Fitri 1447 H (Cuti Bersama)',
+                '2026-05-23': 'Hari Raya Idul Fitri 1447 H',
+                '2026-05-24': 'Hari Raya Idul Fitri 1447 H',
+                '2026-05-25': 'Hari Raya Idul Fitri 1447 H (Cuti Bersama)',
+                '2026-05-26': 'Hari Raya Idul Fitri 1447 H (Cuti Bersama)',
+                '2026-06-01': 'Hari Lahir Pancasila',
+                '2026-08-17': 'Hari Kemerdekaan RI',
+                '2026-08-27': 'Hari Raya Idul Adha 1447 H',
+                '2026-09-16': 'Tahun Baru Islam 1448 H',
+                '2026-11-25': 'Maulid Nabi Muhammad SAW',
+                '2026-12-25': 'Hari Raya Natal',
+                '2026-12-26': 'Hari Raya Natal (Cuti Bersama)'
+            }
+        };
+
+        // Fixed holidays that occur every year
+        const fixedHolidays = {
+            '01-01': 'Tahun Baru Masehi',
+            '05-01': 'Hari Buruh Internasional',
+            '06-01': 'Hari Lahir Pancasila',
+            '08-17': 'Hari Kemerdekaan RI',
+            '12-25': 'Hari Raya Natal'
+        };
+
+        function getHolidaysForYear(year) {
+            // Return holidays for specific year if available
+            if (holidaysData[year.toString()]) {
+                return holidaysData[year.toString()];
+            }
+            
+            // Fallback: generate fixed holidays for any year
+            const holidays = {};
+            for (const [monthDay, name] of Object.entries(fixedHolidays)) {
+                holidays[`${year}-${monthDay}`] = name;
+            }
+            return holidays;
+        }
+
+        let currentDate = new Date();
+        let displayMonth = currentDate.getMonth();
+        let displayYear = currentDate.getFullYear();
+
+        const monthNames = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function isHoliday(date) {
+            const year = date.getFullYear();
+            const dateStr = formatDate(date);
+            const yearHolidays = getHolidaysForYear(year);
+            return yearHolidays[dateStr];
+        }
+
+        function generateCalendar(month, year) {
+            const calendarDays = document.getElementById('calendar-days');
+            const monthYearDisplay = document.getElementById('calendar-month-year');
+            
+            calendarDays.innerHTML = '';
+            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            // Previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = daysInPrevMonth - i;
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                calendarDays.appendChild(dayElement);
+            }
+
+            // Current month days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+
+                // Check if today
+                if (day === currentDate.getDate() && 
+                    month === currentDate.getMonth() && 
+                    year === currentDate.getFullYear()) {
+                    dayElement.classList.add('today');
+                }
+
+                // Check if holiday
+                const holidayName = isHoliday(date);
+                if (holidayName) {
+                    dayElement.classList.add('holiday');
+                    const indicator = document.createElement('div');
+                    indicator.className = 'holiday-indicator';
+                    dayElement.appendChild(indicator);
+                    dayElement.title = holidayName;
+                }
+
+                calendarDays.appendChild(dayElement);
+            }
+
+            // Next month days
+            const totalCells = calendarDays.children.length;
+            const remainingCells = 42 - totalCells; // 6 weeks * 7 days
+            for (let day = 1; day <= remainingCells; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                calendarDays.appendChild(dayElement);
+            }
+
+            updateHolidayInfo(month, year);
+        }
+
+        function updateHolidayInfo(month, year) {
+            const holidayInfo = document.getElementById('holiday-info');
+            const monthHolidays = [];
+            const yearHolidays = getHolidaysForYear(year);
+
+            for (const [dateStr, holidayName] of Object.entries(yearHolidays)) {
+                const date = new Date(dateStr);
+                if (date.getMonth() === month && date.getFullYear() === year) {
+                    monthHolidays.push({
+                        date: date.getDate(),
+                        name: holidayName
+                    });
+                }
+            }
+
+            if (monthHolidays.length > 0) {
+                let html = '<h4>🎉 Libur Nasional:</h4>';
+                monthHolidays.sort((a, b) => a.date - b.date);
+                monthHolidays.forEach(holiday => {
+                    html += `<div class="holiday-item">
+                        <span class="holiday-date">${holiday.date} ${monthNames[month]}</span> - ${holiday.name}
+                    </div>`;
+                });
+                holidayInfo.innerHTML = html;
+                holidayInfo.style.display = 'block';
+            } else {
+                holidayInfo.innerHTML = '<h4>Tidak ada libur nasional bulan ini</h4>';
+                holidayInfo.style.display = 'block';
+            }
+        }
+
+        function initCalendar() {
+            generateCalendar(displayMonth, displayYear);
+
+            // Toggle calendar visibility
+            const calendarToggle = document.getElementById('calendar-toggle');
+            const calendarContainer = document.getElementById('calendar-container');
+            const calendarOverlay = document.getElementById('calendar-overlay');
+            const calendarClose = document.getElementById('calendar-close');
+
+            function openCalendar() {
+                calendarContainer.classList.add('active');
+                calendarOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeCalendar() {
+                calendarContainer.classList.remove('active');
+                calendarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            calendarToggle.addEventListener('click', openCalendar);
+            calendarClose.addEventListener('click', closeCalendar);
+            calendarOverlay.addEventListener('click', closeCalendar);
+
+            // Close on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && calendarContainer.classList.contains('active')) {
+                    closeCalendar();
+                }
+            });
+
+            document.getElementById('prev-month').addEventListener('click', () => {
+                displayMonth--;
+                if (displayMonth < 0) {
+                    displayMonth = 11;
+                    displayYear--;
+                }
+                generateCalendar(displayMonth, displayYear);
+            });
+
+            document.getElementById('next-month').addEventListener('click', () => {
+                displayMonth++;
+                if (displayMonth > 11) {
+                    displayMonth = 0;
+                    displayYear++;
+                }
+                generateCalendar(displayMonth, displayYear);
+            });
+        }
+
         // Initialize on page load
         init();
+        initCalendar();
     </script>
 </body>
 </html>
