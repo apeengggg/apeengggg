@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You Suffer But Why</title>
-    <meta name="description" content="You suffer. But why? — 1.316 seconds, four words, Napalm Death, 1987.">
+    <meta name="description" content="apeng.dev — Mohamad Irfan Manaf, web application developer from Cirebon.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
             --ink: #0e0d0c;
             --smudge: #5b5852;
             --stamp: #b1161c;
+            --h: clamp(64px, min(24vh, 17vw), 260px); /* headline size, bound by both axes so it always fits */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +22,8 @@
         html { background: var(--ink); }
 
         body {
-            min-height: 100vh;
+            height: 100vh;
+            height: 100svh;
             background: var(--paper);
             color: var(--ink);
             font-family: 'Special Elite', 'Courier New', monospace;
@@ -52,10 +54,12 @@
         }
 
         .sheet {
-            position: relative;
-            max-width: 1180px;
+            height: 100%;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 28px 16px 56px;
+            padding: clamp(14px, 3vh, 28px) 16px;
+            display: flex;
+            flex-direction: column;
         }
 
         .top {
@@ -69,88 +73,95 @@
             padding-bottom: 8px;
         }
 
+        .stage {
+            flex: 1;
+            min-height: 0;
+            display: grid;
+            grid-template-columns: auto minmax(280px, 400px);
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px 48px;
+        }
+
         /* ---------- the headline ---------- */
         h1 {
             font-family: 'Anton', Impact, sans-serif;
             font-weight: 400;
             text-transform: uppercase;
             line-height: .8;
-            margin: 36px 0 28px;
             filter: url(#xerox);
+            font-size: var(--h);
         }
 
         h1 span { display: block; width: fit-content; }
 
-        .l-you    { font-size: clamp(88px, 23vw, 300px); transform: rotate(-2deg); margin-left: -.03em; }
-        .l-suffer { font-size: clamp(88px, 23vw, 300px); transform: rotate(1deg); letter-spacing: -.01em; }
+        .l-you    { transform: rotate(-2deg); margin-left: -.03em; }
+        .l-suffer { transform: rotate(1deg); letter-spacing: -.01em; }
 
         .l-but, .l-why {
             background: var(--ink);
             color: var(--paper);
             padding: .06em .12em 0;
         }
-        .l-but { font-size: clamp(60px, 15vw, 196px); transform: rotate(-3deg) translateX(8vw); margin-top: .12em; }
-        .l-why { font-size: clamp(88px, 23vw, 300px); transform: rotate(1.5deg) translateX(3vw); }
+        .l-but { font-size: .65em; transform: rotate(-3deg) translateX(.9em); margin-top: .12em; }
+        .l-why { transform: rotate(1.5deg) translateX(.2em); }
         .l-why b { color: var(--stamp); font-weight: 400; }
 
-        /* rubber stamp */
-        .stamp {
-            position: absolute;
-            right: 4%;
-            top: 190px;
-            width: 250px;
-            height: 250px;
-            border: 6px double var(--stamp);
-            border-radius: 50%;
-            color: var(--stamp);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            transform: rotate(14deg);
-            mix-blend-mode: multiply;
-            opacity: .88;
-            filter: url(#xerox);
-        }
-        .stamp b {
+        /* ---------- right column ---------- */
+        .side { display: flex; flex-direction: column; gap: clamp(12px, 2.4vh, 22px); }
+
+        .side h2 {
             font-family: 'Anton', Impact, sans-serif;
             font-weight: 400;
-            font-size: 84px;
-            line-height: 1;
+            font-size: clamp(22px, 3.4vh, 30px);
+            line-height: 1.05;
+            text-transform: uppercase;
         }
-        .stamp small { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; max-width: 17ch; line-height: 1.3; }
+        .side h2 small {
+            display: block;
+            font-family: 'Special Elite', 'Courier New', monospace;
+            font-size: 13px;
+            letter-spacing: .08em;
+            color: var(--smudge);
+            margin-bottom: 4px;
+        }
 
-        /* ---------- the 1.316 second button ---------- */
-        .trigger {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 14px 22px;
-            margin: 48px 0 56px;
+        .side p { font-size: 15px; line-height: 1.55; }
+
+        .links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; text-transform: uppercase; letter-spacing: .06em; }
+        .links a { color: inherit; }
+        .links a:hover { color: var(--stamp); }
+
+        .player {
+            border: 3px solid var(--ink);
+            background: var(--ink);
+            box-shadow: 5px 5px 0 var(--ink);
+            height: 86px;
         }
+        .player iframe, .player > div { display: block; width: 100%; height: 80px; border: 0; filter: grayscale(1) contrast(1.1); }
 
         #play {
             font-family: 'Anton', Impact, sans-serif;
-            font-size: 26px;
+            font-size: 24px;
             letter-spacing: .04em;
             text-transform: uppercase;
             color: var(--paper);
             background: var(--stamp);
             border: 3px solid var(--ink);
-            padding: 10px 22px 8px;
+            padding: 8px 20px 6px;
             cursor: pointer;
             transform: rotate(-1deg);
             box-shadow: 5px 5px 0 var(--ink);
+            align-self: flex-start;
         }
         #play:hover { transform: rotate(-1deg) translate(-2px, -2px); box-shadow: 7px 7px 0 var(--ink); }
         #play:active { transform: rotate(-1deg) translate(4px, 4px); box-shadow: 1px 1px 0 var(--ink); }
         #play:focus-visible { outline: 3px dashed var(--ink); outline-offset: 5px; }
-        #play:disabled { cursor: wait; }
 
-        .trigger p { font-size: 15px; max-width: 36ch; }
+        .counter { font-size: 13px; color: var(--smudge); }
+        .counter strong { color: var(--stamp); font-weight: 400; }
 
-        /* the blast: page inverts + shakes for exactly 1316ms */
+        /* the blast: page inverts + shakes for 1.316s, the length of the song */
         body.blast { animation: invert 1316ms steps(1, end); }
         body.blast .sheet { animation: shake 90ms linear infinite; }
         @keyframes invert {
@@ -165,75 +176,20 @@
             100% { transform: translate(0, 0); }
         }
         body.blast h1 .l-but, body.blast h1 .l-why { background: var(--paper); color: var(--ink); }
-
-        /* ---------- liner notes ---------- */
-        .notes {
-            display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 40px;
-            border-top: 3px solid var(--ink);
-            padding-top: 26px;
-        }
-
-        .notes h2 {
-            font-family: 'Anton', Impact, sans-serif;
-            font-weight: 400;
-            font-size: 30px;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-        }
-
-        .notes p { font-size: 17px; line-height: 1.6; margin-bottom: 14px; max-width: 60ch; }
-        .notes p mark { background: var(--ink); color: var(--paper); padding: 0 .25em; }
-
-        .spec { list-style: none; font-size: 15px; }
-        .spec li {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            border-bottom: 1px dashed var(--smudge);
-            padding: 7px 0;
-        }
-        .spec li span:first-child { color: var(--smudge); text-transform: uppercase; letter-spacing: .06em; }
-        .spec li span:last-child { text-align: right; }
-
-        .counter {
-            margin-top: 22px;
-            border: 3px solid var(--ink);
-            padding: 14px 16px;
-            transform: rotate(.8deg);
-            font-size: 15px;
-            line-height: 1.5;
-        }
-        .counter strong {
-            font-family: 'Anton', Impact, sans-serif;
-            font-weight: 400;
-            font-size: 44px;
-            display: block;
-            line-height: 1;
-            color: var(--stamp);
-        }
-
-        footer {
-            margin-top: 56px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        footer a { color: inherit; }
+        body.blast .side h2 small, body.blast .counter { color: inherit; }
 
         @media (max-width: 760px) {
-            .top span:last-child { display: none; }
-            .stamp { display: none; }
-            .l-you, .l-suffer, .l-why { font-size: 31vw; }
-            .l-but { font-size: 21vw; }
-            .notes { grid-template-columns: 1fr; gap: 28px; }
-            .l-but { transform: rotate(-3deg) translateX(4vw); }
-            .l-why { transform: rotate(1.5deg) translateX(0); }
+            :root { --h: clamp(50px, min(13vh, 27vw), 150px); }
+            .top span:nth-child(2) { display: none; }
+            .stage { grid-template-columns: 1fr; align-content: space-evenly; gap: 18px; }
+            .side p { font-size: 14px; }
+            .counter { display: none; }
+        }
+
+        @media (max-width: 760px) and (max-height: 700px) {
+            .side { gap: 10px; }
+            .side p { font-size: 13px; line-height: 1.45; }
+            #play { font-size: 20px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -252,57 +208,38 @@
 
     <main class="sheet">
         <div class="top">
-            <span>Side A &mdash; Track 12</span>
-            <span>Birmingham, Aug. 1986</span>
+            <span>Mohamad Irfan Manaf</span>
+            <span>Cirebon, West Java</span>
             <span>apeng.dev</span>
         </div>
 
-        <h1 aria-label="You suffer, but why?">
-            <span class="l-you">You</span>
-            <span class="l-suffer">Suffer</span>
-            <span class="l-but">But</span>
-            <span class="l-why">Why<b>?</b></span>
-        </h1>
+        <div class="stage">
+            <h1 aria-label="You suffer, but why?">
+                <span class="l-you">You</span>
+                <span class="l-suffer">Suffer</span>
+                <span class="l-but">But</span>
+                <span class="l-why">Why<b>?</b></span>
+            </h1>
 
-        <div class="stamp" aria-hidden="true"><b>1.316</b><small>seconds. That's all you get.</small></div>
-
-        <div class="trigger">
-            <button id="play" type="button">Play &mdash; 1.316 sec</button>
-            <p id="after">Blink and it's over. That's the whole point.</p>
-        </div>
-
-        <section class="notes">
-            <div>
-                <h2>Four words. No chorus.</h2>
-                <p>Napalm Death recorded it at Rich Bitch Studio in Birmingham in 1986 and put it on <em>Scum</em> the next year. It runs for 1.316 seconds. The band thought of it as a joke to play live, and it still turned into one of the most talked-about songs in heavy music.</p>
-                <p>The joke works because the question is real. It doesn't blame the world, the system or the Monday morning. It points back at you: <mark>you suffer &mdash; but why?</mark> It comes with no answer, only one more second to think about it, and then the song is over.</p>
-                <p>You can't explain it the way you'd explain a long song. You live it, and then you ask yourself again.</p>
-            </div>
-            <div>
-                <ul class="spec">
-                    <li><span>Artist</span><span>Napalm Death</span></li>
-                    <li><span>Album</span><span>Scum (1987)</span></li>
-                    <li><span>Label</span><span>Earache Records</span></li>
-                    <li><span>Written by</span><span>Bullen / Broadrick / Harris</span></li>
-                    <li><span>Length</span><span>1.316 s</span></li>
-                    <li><span>Words</span><span>4</span></li>
-                    <li><span>Answers given</span><span>0</span></li>
-                </ul>
-                <div class="counter" aria-live="off">
-                    <strong id="plays">0</strong>
-                    times it could have played since you opened this page. You're still here.
+            <div class="side">
+                <h2><small>Made by</small>Mohamad Irfan Manaf</h2>
+                <p>Web application developer from Cirebon. Builds web apps at PMPLAND Group with PHP and JavaScript: Node.js on the back end, Vue.js on the front, shipped to Google Cloud. Engineering graduate of Universitas Muhammadiyah Cirebon.</p>
+                <div class="links">
+                    <a href="https://github.com/apeengggg" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://gitlab.com/apeengggg" target="_blank" rel="noopener">GitLab</a>
+                    <a href="https://www.linkedin.com/in/mohamad-irfan-manaf-01a22a193/" target="_blank" rel="noopener">LinkedIn</a>
                 </div>
-            </div>
-        </section>
 
-        <footer>
-            <span>Made with anxiety &amp; a photocopier</span>
-            <a href="https://en.wikipedia.org/wiki/You_Suffer" target="_blank" rel="noopener">Read about the song &rarr;</a>
-        </footer>
+                <div class="player"><div id="embed"></div></div>
+                <button id="play" type="button">Play it &mdash; 1.316 sec</button>
+                <div class="counter"><strong id="plays">0</strong> times it could have played since you got here.</div>
+            </div>
+        </div>
     </main>
 
     <script>
         const SONG_MS = 1316;
+        const TRACK = 'spotify:track:5oD2Z1OOx1Tmcu2mc9sLY2'; // Napalm Death — You Suffer (Scum, 1987)
         const opened = performance.now();
         const playsEl = document.getElementById('plays');
 
@@ -310,25 +247,44 @@
             playsEl.textContent = Math.floor((performance.now() - opened) / SONG_MS).toLocaleString('en');
         }, 100);
 
-        const btn = document.getElementById('play');
-        const after = document.getElementById('after');
-        const lines = [
-            "That was it. Did it fix anything?",
-            "Again? Still no answer.",
-            "Same 1.316 seconds. Same question.",
-            "You keep pressing it. But why?"
-        ];
-        let count = 0;
-
-        btn.addEventListener('click', () => {
-            btn.disabled = true;
+        let blasting = false;
+        function blast() {
+            if (blasting) return;
+            blasting = true;
             document.body.classList.add('blast');
             setTimeout(() => {
                 document.body.classList.remove('blast');
-                btn.disabled = false;
-                after.textContent = lines[Math.min(count++, lines.length - 1)];
+                blasting = false;
             }, SONG_MS);
+        }
+
+        let controller = null;
+        let wasPaused = true;
+
+        window.onSpotifyIframeApiReady = (IFrameAPI) => {
+            IFrameAPI.createController(
+                document.getElementById('embed'),
+                { uri: TRACK, width: '100%', height: 80 },
+                (c) => {
+                    controller = c;
+                    // started from the embed's own play button too
+                    c.addListener('playback_update', (e) => {
+                        const paused = e.data.isPaused;
+                        if (wasPaused && !paused) blast();
+                        wasPaused = paused;
+                    });
+                }
+            );
+        };
+
+        document.getElementById('play').addEventListener('click', () => {
+            blast();
+            if (controller) {
+                controller.seek(0);
+                controller.play();
+            }
         });
     </script>
+    <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
 </body>
 </html>
