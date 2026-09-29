@@ -1,1102 +1,334 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamad Irfan Manaf</title>
+    <title>You Suffer But Why</title>
+    <meta name="description" content="You suffer. But why? — 1.316 seconds, four words, Napalm Death, 1987.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --paper: #e7e3d9;
+            --ink: #0e0d0c;
+            --smudge: #5b5852;
+            --stamp: #b1161c;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { background: var(--ink); }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            transition: background 1s ease;
-        }
-
-        /* Weather Scenes */
-        .scene {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease;
-            z-index: 1;
-        }
-
-        .scene.active {
-            opacity: 1;
-        }
-
-        /* Clear/Sunny Day */
-        .sunny {
-            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 50%, #FFEAA7 100%);
-        }
-
-        /* Cloudy */
-        .cloudy {
-            background: linear-gradient(to bottom, #95A5A6 0%, #BDC3C7 50%, #D5DBDB 100%);
-        }
-
-        /* Rainy */
-        .rainy {
-            background: linear-gradient(to bottom, #2C3E50 0%, #4A5F7F 50%, #6C7A89 100%);
-        }
-
-        /* Night */
-        .night {
-            background: linear-gradient(to bottom, #0F2027 0%, #203A43 50%, #2C5364 100%);
-        }
-
-        /* Snowy */
-        .snowy {
-            background: linear-gradient(to bottom, #E8EAF6 0%, #C5CAE9 50%, #FFFFFF 100%);
-        }
-
-        /* Sun */
-        .sun {
-            position: absolute;
-            top: 80px;
-            right: 100px;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, #FDB813 0%, #FFEB3B 100%);
-            border-radius: 50%;
-            box-shadow: 0 0 60px rgba(253, 184, 19, 0.8);
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        /* Moon */
-        .moon {
-            position: absolute;
-            top: 80px;
-            right: 100px;
-            width: 100px;
-            height: 100px;
-            background: #F4F4F4;
-            border-radius: 50%;
-            box-shadow: 0 0 40px rgba(244, 244, 244, 0.6);
-        }
-
-        /* Clouds */
-        .cloud {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 100px;
-            animation: float 20s linear infinite;
-        }
-
-        .cloud::before,
-        .cloud::after {
-            content: '';
-            position: absolute;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 100px;
-        }
-
-        .cloud1 {
-            width: 100px;
-            height: 40px;
-            top: 100px;
-            left: -100px;
-        }
-
-        .cloud1::before {
-            width: 50px;
-            height: 50px;
-            top: -25px;
-            left: 20px;
-        }
-
-        .cloud1::after {
-            width: 60px;
-            height: 40px;
-            top: -15px;
-            right: 20px;
-        }
-
-        .cloud2 {
-            width: 120px;
-            height: 50px;
-            top: 200px;
-            left: -150px;
-            animation-delay: 5s;
-            animation-duration: 25s;
-        }
-
-        .cloud2::before {
-            width: 60px;
-            height: 60px;
-            top: -30px;
-            left: 25px;
-        }
-
-        .cloud2::after {
-            width: 70px;
-            height: 50px;
-            top: -20px;
-            right: 25px;
-        }
-
-        @keyframes float {
-            from { transform: translateX(0); }
-            to { transform: translateX(calc(100vw + 200px)); }
-        }
-
-        /* Rain */
-        .rain {
-            position: absolute;
-            width: 2px;
-            height: 50px;
-            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.6));
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        /* Snow */
-        .snow {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            animation: snowfall linear infinite;
-        }
-
-        @keyframes snowfall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-
-        /* Stars */
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 2s ease-in-out infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* Content Container */
-        .content {
+            min-height: 100vh;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: 'Special Elite', 'Courier New', monospace;
+            overflow-x: hidden;
             position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            color: white;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .name {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            animation: fadeInDown 1s ease-out;
-            letter-spacing: 3px;
-        }
-
-        .weather-info {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease-out 0.3s backwards;
-        }
-
-        .location {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.6s backwards;
-        }
-
-        .temperature {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 20px 0;
-            animation: fadeInUp 1s ease-out 0.9s backwards;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .loading {
-            font-size: 1.5rem;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        /* Calendar Toggle Button */
-        .calendar-toggle {
+        /* photocopier toner grain over everything */
+        body::after {
+            content: "";
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 101;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            animation: slideInRight 1s ease-out 1.2s backwards;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: .38;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.35'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
         }
 
-        .calendar-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .calendar-toggle svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        }
-
-        /* Calendar Container */
-        .calendar-container {
+        /* dark edge the copier leaves on the page border */
+        body::before {
+            content: "";
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            z-index: 102;
-            max-width: 450px;
-            width: 90%;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            inset: 0;
+            pointer-events: none;
+            z-index: 49;
+            box-shadow: inset 0 0 90px 10px rgba(14, 13, 12, .55);
         }
 
-        .calendar-container.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
+        .sheet {
+            position: relative;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 16px 56px;
         }
 
-        .calendar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            z-index: 101;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .calendar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .calendar-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 35px;
-            height: 35px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            line-height: 1;
-        }
-
-        .calendar-close:hover {
-            background: rgba(255, 0, 0, 0.4);
-            transform: rotate(90deg);
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .calendar-header {
+        .top {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            color: white;
+            gap: 16px;
+            font-size: 13px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            border-bottom: 3px solid var(--ink);
+            padding-bottom: 8px;
         }
 
-        .calendar-header h3 {
-            font-size: 1.4rem;
-            font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        /* ---------- the headline ---------- */
+        h1 {
+            font-family: 'Anton', Impact, sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            line-height: .8;
+            margin: 36px 0 28px;
+            filter: url(#xerox);
         }
 
-        .calendar-nav {
-            display: flex;
-            gap: 10px;
-        }
+        h1 span { display: block; width: fit-content; }
 
-        .calendar-nav button {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            width: 35px;
-            height: 35px;
+        .l-you    { font-size: clamp(88px, 23vw, 300px); transform: rotate(-2deg); margin-left: -.03em; }
+        .l-suffer { font-size: clamp(88px, 23vw, 300px); transform: rotate(1deg); letter-spacing: -.01em; }
+
+        .l-but, .l-why {
+            background: var(--ink);
+            color: var(--paper);
+            padding: .06em .12em 0;
+        }
+        .l-but { font-size: clamp(60px, 15vw, 196px); transform: rotate(-3deg) translateX(8vw); margin-top: .12em; }
+        .l-why { font-size: clamp(88px, 23vw, 300px); transform: rotate(1.5deg) translateX(3vw); }
+        .l-why b { color: var(--stamp); font-weight: 400; }
+
+        /* rubber stamp */
+        .stamp {
+            position: absolute;
+            right: 4%;
+            top: 190px;
+            width: 250px;
+            height: 250px;
+            border: 6px double var(--stamp);
             border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            font-weight: bold;
-        }
-
-        .calendar-nav button:hover {
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(1.15);
-        }
-
-        .calendar-weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-
-        .calendar-weekday {
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0.9);
-            padding: 8px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .calendar-day {
-            aspect-ratio: 1;
+            color: var(--stamp);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            color: white;
+            text-align: center;
+            transform: rotate(14deg);
+            mix-blend-mode: multiply;
+            opacity: .88;
+            filter: url(#xerox);
+        }
+        .stamp b {
+            font-family: 'Anton', Impact, sans-serif;
+            font-weight: 400;
+            font-size: 84px;
+            line-height: 1;
+        }
+        .stamp small { font-size: 14px; letter-spacing: .12em; text-transform: uppercase; max-width: 17ch; line-height: 1.3; }
+
+        /* ---------- the 1.316 second button ---------- */
+        .trigger {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px 22px;
+            margin: 48px 0 56px;
+        }
+
+        #play {
+            font-family: 'Anton', Impact, sans-serif;
+            font-size: 26px;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--paper);
+            background: var(--stamp);
+            border: 3px solid var(--ink);
+            padding: 10px 22px 8px;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            background: rgba(255, 255, 255, 0.05);
-            font-weight: 500;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0 var(--ink);
+        }
+        #play:hover { transform: rotate(-1deg) translate(-2px, -2px); box-shadow: 7px 7px 0 var(--ink); }
+        #play:active { transform: rotate(-1deg) translate(4px, 4px); box-shadow: 1px 1px 0 var(--ink); }
+        #play:focus-visible { outline: 3px dashed var(--ink); outline-offset: 5px; }
+        #play:disabled { cursor: wait; }
+
+        .trigger p { font-size: 15px; max-width: 36ch; }
+
+        /* the blast: page inverts + shakes for exactly 1316ms */
+        body.blast { animation: invert 1316ms steps(1, end); }
+        body.blast .sheet { animation: shake 90ms linear infinite; }
+        @keyframes invert {
+            0%, 30%, 62%, 90% { background: var(--ink); color: var(--paper); }
+            15%, 46%, 76%     { background: var(--stamp); color: var(--ink); }
+        }
+        @keyframes shake {
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(-7px, 4px) rotate(-.4deg); }
+            50%  { transform: translate(6px, -5px); }
+            75%  { transform: translate(-4px, -3px) rotate(.3deg); }
+            100% { transform: translate(0, 0); }
+        }
+        body.blast h1 .l-but, body.blast h1 .l-why { background: var(--paper); color: var(--ink); }
+
+        /* ---------- liner notes ---------- */
+        .notes {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 40px;
+            border-top: 3px solid var(--ink);
+            padding-top: 26px;
         }
 
-        .calendar-day:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.15);
-            z-index: 10;
+        .notes h2 {
+            font-family: 'Anton', Impact, sans-serif;
+            font-weight: 400;
+            font-size: 30px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
         }
 
-        .calendar-day.today {
-            background: rgba(255, 255, 255, 0.4);
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.6);
+        .notes p { font-size: 17px; line-height: 1.6; margin-bottom: 14px; max-width: 60ch; }
+        .notes p mark { background: var(--ink); color: var(--paper); padding: 0 .25em; }
+
+        .spec { list-style: none; font-size: 15px; }
+        .spec li {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px dashed var(--smudge);
+            padding: 7px 0;
+        }
+        .spec li span:first-child { color: var(--smudge); text-transform: uppercase; letter-spacing: .06em; }
+        .spec li span:last-child { text-align: right; }
+
+        .counter {
+            margin-top: 22px;
+            border: 3px solid var(--ink);
+            padding: 14px 16px;
+            transform: rotate(.8deg);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .counter strong {
+            font-family: 'Anton', Impact, sans-serif;
+            font-weight: 400;
+            font-size: 44px;
+            display: block;
+            line-height: 1;
+            color: var(--stamp);
         }
 
-        .calendar-day.holiday {
-            background: rgba(255, 50, 50, 0.4);
-            border: 2px solid rgba(255, 50, 50, 0.7);
+        footer {
+            margin-top: 56px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        footer a { color: inherit; }
+
+        @media (max-width: 760px) {
+            .top span:last-child { display: none; }
+            .stamp { display: none; }
+            .l-you, .l-suffer, .l-why { font-size: 31vw; }
+            .l-but { font-size: 21vw; }
+            .notes { grid-template-columns: 1fr; gap: 28px; }
+            .l-but { transform: rotate(-3deg) translateX(4vw); }
+            .l-why { transform: rotate(1.5deg) translateX(0); }
         }
 
-        .calendar-day.holiday.today {
-            background: rgba(255, 100, 100, 0.5);
-            border: 2px solid rgba(255, 200, 0, 0.9);
-            box-shadow: 0 0 25px rgba(255, 200, 0, 0.7);
-        }
-
-        .calendar-day.other-month {
-            opacity: 0.3;
-            cursor: default;
-        }
-
-        .calendar-day.other-month:hover {
-            transform: none;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .calendar-day.empty {
-            cursor: default;
-        }
-
-        .holiday-indicator {
-            position: absolute;
-            top: 3px;
-            right: 3px;
-            width: 7px;
-            height: 7px;
-            background: #ff4444;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-dot {
-            0%, 100% { 
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% { 
-                transform: scale(1.3);
-                opacity: 0.7;
-            }
-        }
-
-        .holiday-info {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            max-height: 180px;
-            overflow-y: auto;
-        }
-
-        .holiday-info h4 {
-            font-size: 1rem;
-            margin-bottom: 12px;
-            color: rgba(255, 255, 255, 0.95);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-        }
-
-        .holiday-item {
-            font-size: 0.85rem;
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            background: rgba(255, 50, 50, 0.25);
-            border-radius: 8px;
-            border-left: 4px solid rgba(255, 50, 50, 0.7);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .holiday-item:hover {
-            background: rgba(255, 50, 50, 0.35);
-            transform: translateX(5px);
-        }
-
-        .holiday-date {
-            font-weight: bold;
-            color: #FFD700;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Scrollbar styling */
-        .holiday-info::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .holiday-info::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .holiday-info::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 10px;
-        }
-
-        .holiday-info::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .name {
-                font-size: 2.5rem;
-            }
-            .weather-info {
-                font-size: 1.2rem;
-            }
-            .temperature {
-                font-size: 2rem;
-            }
-            .calendar-toggle {
-                bottom: 20px;
-                right: 20px;
-                width: 50px;
-                height: 50px;
-            }
-            .calendar-toggle svg {
-                width: 25px;
-                height: 25px;
-            }
-            .calendar-container {
-                width: 95%;
-                padding: 20px;
-            }
-            .calendar-header h3 {
-                font-size: 1.2rem;
-            }
-            .calendar-day {
-                font-size: 0.85rem;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            body.blast .sheet { animation: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Weather Scenes -->
-    <div class="scene sunny" id="sunny-scene">
-        <div class="sun"></div>
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-    </div>
+    <!-- rough toner edges on the headline -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <filter id="xerox">
+            <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="7" result="t"/>
+            <feDisplacementMap in="SourceGraphic" in2="t" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+    </svg>
 
-    <div class="scene cloudy" id="cloudy-scene">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-    </div>
-
-    <div class="scene rainy" id="rainy-scene">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-    </div>
-
-    <div class="scene night" id="night-scene">
-        <div class="moon"></div>
-    </div>
-
-    <div class="scene snowy" id="snowy-scene"></div>
-
-    <!-- Content -->
-    <div class="content">
-        <h1 class="name">You Suffer?! But Why?!!</h1>
-        <div class="weather-info" id="weather-info">
-            <div class="loading">Memuat cuaca...</div>
+    <main class="sheet">
+        <div class="top">
+            <span>Side A &mdash; Track 12</span>
+            <span>Birmingham, Aug. 1986</span>
+            <span>apeng.dev</span>
         </div>
-    </div>
 
-    <!-- Calendar Toggle Button -->
-    <div class="calendar-toggle" id="calendar-toggle">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 4H7v5h5v-5z"/>
-        </svg>
-    </div>
+        <h1 aria-label="You suffer, but why?">
+            <span class="l-you">You</span>
+            <span class="l-suffer">Suffer</span>
+            <span class="l-but">But</span>
+            <span class="l-why">Why<b>?</b></span>
+        </h1>
 
-    <!-- Calendar Overlay -->
-    <div class="calendar-overlay" id="calendar-overlay"></div>
+        <div class="stamp" aria-hidden="true"><b>1.316</b><small>seconds. That's all you get.</small></div>
 
-    <!-- Calendar -->
-    <div class="calendar-container" id="calendar-container">
-        <button class="calendar-close" id="calendar-close">×</button>
-        <div class="calendar-header">
-            <h3 id="calendar-month-year"></h3>
-            <div class="calendar-nav">
-                <button id="prev-month">‹</button>
-                <button id="next-month">›</button>
+        <div class="trigger">
+            <button id="play" type="button">Play &mdash; 1.316 sec</button>
+            <p id="after">Blink and it's over. That's the whole point.</p>
+        </div>
+
+        <section class="notes">
+            <div>
+                <h2>Four words. No chorus.</h2>
+                <p>Napalm Death recorded it at Rich Bitch Studio in Birmingham in 1986 and put it on <em>Scum</em> the next year. It runs for 1.316 seconds. The band thought of it as a joke to play live, and it still turned into one of the most talked-about songs in heavy music.</p>
+                <p>The joke works because the question is real. It doesn't blame the world, the system or the Monday morning. It points back at you: <mark>you suffer &mdash; but why?</mark> It comes with no answer, only one more second to think about it, and then the song is over.</p>
+                <p>You can't explain it the way you'd explain a long song. You live it, and then you ask yourself again.</p>
             </div>
-        </div>
-        <div class="calendar-weekdays">
-            <div class="calendar-weekday">Min</div>
-            <div class="calendar-weekday">Sen</div>
-            <div class="calendar-weekday">Sel</div>
-            <div class="calendar-weekday">Rab</div>
-            <div class="calendar-weekday">Kam</div>
-            <div class="calendar-weekday">Jum</div>
-            <div class="calendar-weekday">Sab</div>
-        </div>
-        <div class="calendar-days" id="calendar-days"></div>
-        <div class="holiday-info" id="holiday-info"></div>
-    </div>
+            <div>
+                <ul class="spec">
+                    <li><span>Artist</span><span>Napalm Death</span></li>
+                    <li><span>Album</span><span>Scum (1987)</span></li>
+                    <li><span>Label</span><span>Earache Records</span></li>
+                    <li><span>Written by</span><span>Bullen / Broadrick / Harris</span></li>
+                    <li><span>Length</span><span>1.316 s</span></li>
+                    <li><span>Words</span><span>4</span></li>
+                    <li><span>Answers given</span><span>0</span></li>
+                </ul>
+                <div class="counter" aria-live="off">
+                    <strong id="plays">0</strong>
+                    times it could have played since you opened this page. You're still here.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <span>Made with anxiety &amp; a photocopier</span>
+            <a href="https://en.wikipedia.org/wiki/You_Suffer" target="_blank" rel="noopener">Read about the song &rarr;</a>
+        </footer>
+    </main>
 
     <script>
-        // API Key dari OpenWeatherMap (gunakan API key Anda sendiri)
-        const API_KEY = '895284fb2d2c50a520ea537456963d9c'; // Demo key
-        
-        // Default location: Cirebon, Indonesia
-        const DEFAULT_LAT = -6.7063;
-        const DEFAULT_LON = 108.5571;
-        
-        async function getWeather(lat, lon) {
-            try {
-                const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=id`
-                );
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error fetching weather:', error);
-                return null;
-            }
-        }
-        
-        async function getWeatherByCity(city) {
-            try {
-                const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=id`
-                );
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error fetching weather by city:', error);
-                return null;
-            }
-        }
+        const SONG_MS = 1316;
+        const opened = performance.now();
+        const playsEl = document.getElementById('plays');
 
-        function getWeatherScene(weatherCode, isNight) {
-            // Weather codes from OpenWeatherMap
-            if (isNight) return 'night';
-            
-            if (weatherCode >= 200 && weatherCode < 600) {
-                return 'rainy'; // Thunderstorm, Drizzle, Rain
-            } else if (weatherCode >= 600 && weatherCode < 700) {
-                return 'snowy'; // Snow
-            } else if (weatherCode >= 801 && weatherCode <= 804) {
-                return 'cloudy'; // Clouds
-            } else {
-                return 'sunny'; // Clear
-            }
-        }
+        setInterval(() => {
+            playsEl.textContent = Math.floor((performance.now() - opened) / SONG_MS).toLocaleString('en');
+        }, 100);
 
-        function createRaindrops() {
-            const rainyScene = document.getElementById('rainy-scene');
-            for (let i = 0; i < 50; i++) {
-                const rain = document.createElement('div');
-                rain.className = 'rain';
-                rain.style.left = Math.random() * 100 + '%';
-                rain.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
-                rain.style.animationDelay = Math.random() * 2 + 's';
-                rainyScene.appendChild(rain);
-            }
-        }
-
-        function createSnowflakes() {
-            const snowyScene = document.getElementById('snowy-scene');
-            for (let i = 0; i < 50; i++) {
-                const snow = document.createElement('div');
-                snow.className = 'snow';
-                snow.style.left = Math.random() * 100 + '%';
-                snow.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                snow.style.animationDelay = Math.random() * 5 + 's';
-                snow.style.opacity = Math.random();
-                snowyScene.appendChild(snow);
-            }
-        }
-
-        function createStars() {
-            const nightScene = document.getElementById('night-scene');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2 + 's';
-                nightScene.appendChild(star);
-            }
-        }
-
-        function updateScene(scene) {
-            document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
-            document.getElementById(scene + '-scene').classList.add('active');
-        }
-
-        function updateWeatherInfo(data) {
-            const weatherInfo = document.getElementById('weather-info');
-            const temp = Math.round(data.main.temp);
-            const description = data.weather[0].description;
-            const location = data.name;
-            
-            weatherInfo.innerHTML = `
-                <div class="temperature">${temp}°C</div>
-                <div class="weather-info">${description.charAt(0).toUpperCase() + description.slice(1)}</div>
-                <div class="location">📍 ${location}, ${data.sys.country}</div>
-            `;
-        }
-
-        async function loadWeatherData(lat, lon, locationName = null) {
-            const weatherData = await getWeather(lat, lon);
-            
-            if (weatherData && weatherData.cod === 200) {
-                const currentHour = new Date().getHours();
-                const isNight = currentHour < 6 || currentHour > 18;
-                const weatherCode = weatherData.weather[0].id;
-                const scene = getWeatherScene(weatherCode, isNight);
-                
-                updateScene(scene);
-                updateWeatherInfo(weatherData);
-            } else {
-                // Fallback to default sunny scene
-                updateScene('sunny');
-                document.getElementById('weather-info').innerHTML = 
-                    `<div class="temperature">28°C</div>
-                     <div class="weather-info">Cuaca Cerah</div>
-                     <div class="location">📍 ${locationName || 'Cirebon, ID'}</div>`;
-            }
-        }
-
-        async function init() {
-            // Create weather effects
-            createRaindrops();
-            createSnowflakes();
-            createStars();
-
-            // Try to get user location
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        const { latitude, longitude } = position.coords;
-                        await loadWeatherData(latitude, longitude);
-                    },
-                    async (error) => {
-                        console.log('Geolocation denied or failed, using default location (Cirebon)');
-                        // Fallback to default location: Cirebon
-                        await loadWeatherData(DEFAULT_LAT, DEFAULT_LON, 'Cirebon');
-                    },
-                    {
-                        timeout: 10000,
-                        maximumAge: 0
-                    }
-                );
-            } else {
-                // Browser doesn't support geolocation, use default location
-                console.log('Geolocation not supported, using default location (Cirebon)');
-                await loadWeatherData(DEFAULT_LAT, DEFAULT_LON, 'Cirebon');
-            }
-        }
-
-        // Indonesian National Holidays (Multi-year data)
-        const holidaysData = {
-            '2024': {
-                '2024-01-01': 'Tahun Baru Masehi',
-                '2024-02-08': 'Isra Mikraj Nabi Muhammad SAW',
-                '2024-02-10': 'Tahun Baru Imlek 2575 Kongzili',
-                '2024-03-11': 'Hari Suci Nyepi Tahun Baru Saka 1946',
-                '2024-03-29': 'Wafat Isa Al Masih',
-                '2024-03-31': 'Paskah',
-                '2024-04-08': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
-                '2024-04-09': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
-                '2024-04-10': 'Hari Raya Idul Fitri 1445 H',
-                '2024-04-11': 'Hari Raya Idul Fitri 1445 H',
-                '2024-04-12': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
-                '2024-04-15': 'Hari Raya Idul Fitri 1445 H (Cuti Bersama)',
-                '2024-05-01': 'Hari Buruh Internasional',
-                '2024-05-09': 'Kenaikan Isa Al Masih',
-                '2024-05-10': 'Kenaikan Isa Al Masih (Cuti Bersama)',
-                '2024-05-23': 'Hari Raya Waisak 2568',
-                '2024-05-24': 'Hari Raya Waisak 2568 (Cuti Bersama)',
-                '2024-06-01': 'Hari Lahir Pancasila',
-                '2024-06-17': 'Hari Raya Idul Adha 1445 H',
-                '2024-06-18': 'Hari Raya Idul Adha 1445 H (Cuti Bersama)',
-                '2024-07-07': 'Tahun Baru Islam 1446 H',
-                '2024-08-17': 'Hari Kemerdekaan RI',
-                '2024-09-16': 'Maulid Nabi Muhammad SAW',
-                '2024-12-25': 'Hari Raya Natal',
-                '2024-12-26': 'Hari Raya Natal (Cuti Bersama)'
-            },
-            '2025': {
-                '2025-01-01': 'Tahun Baru Masehi',
-                '2025-01-29': 'Tahun Baru Imlek 2576 Kongzili',
-                '2025-03-29': 'Hari Suci Nyepi Tahun Baru Saka 1947',
-                '2025-03-31': 'Isra Mikraj Nabi Muhammad SAW',
-                '2025-04-18': 'Wafat Isa Al Masih',
-                '2025-04-20': 'Paskah',
-                '2025-05-01': 'Hari Buruh Internasional',
-                '2025-05-12': 'Kenaikan Isa Al Masih',
-                '2025-05-29': 'Hari Raya Waisak 2569',
-                '2025-06-01': 'Hari Lahir Pancasila',
-                '2025-06-02': 'Hari Raya Idul Fitri 1446 H (Cuti Bersama)',
-                '2025-06-03': 'Hari Raya Idul Fitri 1446 H',
-                '2025-06-04': 'Hari Raya Idul Fitri 1446 H',
-                '2025-06-05': 'Hari Raya Idul Fitri 1446 H (Cuti Bersama)',
-                '2025-06-06': 'Hari Raya Idul Fitri 1446 H (Cuti Bersama)',
-                '2025-08-17': 'Hari Kemerdekaan RI',
-                '2025-09-06': 'Hari Raya Idul Adha 1446 H',
-                '2025-09-27': 'Tahun Baru Islam 1447 H',
-                '2025-12-06': 'Maulid Nabi Muhammad SAW',
-                '2025-12-25': 'Hari Raya Natal',
-                '2025-12-26': 'Hari Raya Natal (Cuti Bersama)'
-            },
-            '2026': {
-                '2026-01-01': 'Tahun Baru Masehi',
-                '2026-01-18': 'Tahun Baru Imlek 2577 Kongzili',
-                '2026-03-19': 'Hari Suci Nyepi Tahun Baru Saka 1948',
-                '2026-03-20': 'Isra Mikraj Nabi Muhammad SAW',
-                '2026-04-03': 'Wafat Isa Al Masih',
-                '2026-04-05': 'Paskah',
-                '2026-05-01': 'Hari Buruh Internasional',
-                '2026-05-14': 'Kenaikan Isa Al Masih',
-                '2026-05-18': 'Hari Raya Waisak 2570',
-                '2026-05-22': 'Hari Raya Idul Fitri 1447 H (Cuti Bersama)',
-                '2026-05-23': 'Hari Raya Idul Fitri 1447 H',
-                '2026-05-24': 'Hari Raya Idul Fitri 1447 H',
-                '2026-05-25': 'Hari Raya Idul Fitri 1447 H (Cuti Bersama)',
-                '2026-05-26': 'Hari Raya Idul Fitri 1447 H (Cuti Bersama)',
-                '2026-06-01': 'Hari Lahir Pancasila',
-                '2026-08-17': 'Hari Kemerdekaan RI',
-                '2026-08-27': 'Hari Raya Idul Adha 1447 H',
-                '2026-09-16': 'Tahun Baru Islam 1448 H',
-                '2026-11-25': 'Maulid Nabi Muhammad SAW',
-                '2026-12-25': 'Hari Raya Natal',
-                '2026-12-26': 'Hari Raya Natal (Cuti Bersama)'
-            }
-        };
-
-        // Fixed holidays that occur every year
-        const fixedHolidays = {
-            '01-01': 'Tahun Baru Masehi',
-            '05-01': 'Hari Buruh Internasional',
-            '06-01': 'Hari Lahir Pancasila',
-            '08-17': 'Hari Kemerdekaan RI',
-            '12-25': 'Hari Raya Natal'
-        };
-
-        function getHolidaysForYear(year) {
-            // Return holidays for specific year if available
-            if (holidaysData[year.toString()]) {
-                return holidaysData[year.toString()];
-            }
-            
-            // Fallback: generate fixed holidays for any year
-            const holidays = {};
-            for (const [monthDay, name] of Object.entries(fixedHolidays)) {
-                holidays[`${year}-${monthDay}`] = name;
-            }
-            return holidays;
-        }
-
-        let currentDate = new Date();
-        let displayMonth = currentDate.getMonth();
-        let displayYear = currentDate.getFullYear();
-
-        const monthNames = [
-            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        const btn = document.getElementById('play');
+        const after = document.getElementById('after');
+        const lines = [
+            "That was it. Did it fix anything?",
+            "Again? Still no answer.",
+            "Same 1.316 seconds. Same question.",
+            "You keep pressing it. But why?"
         ];
+        let count = 0;
 
-        function formatDate(date) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        function isHoliday(date) {
-            const year = date.getFullYear();
-            const dateStr = formatDate(date);
-            const yearHolidays = getHolidaysForYear(year);
-            return yearHolidays[dateStr];
-        }
-
-        function generateCalendar(month, year) {
-            const calendarDays = document.getElementById('calendar-days');
-            const monthYearDisplay = document.getElementById('calendar-month-year');
-            
-            calendarDays.innerHTML = '';
-            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
-
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const daysInPrevMonth = new Date(year, month, 0).getDate();
-
-            // Previous month days
-            for (let i = firstDay - 1; i >= 0; i--) {
-                const day = daysInPrevMonth - i;
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day other-month';
-                dayElement.textContent = day;
-                calendarDays.appendChild(dayElement);
-            }
-
-            // Current month days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const date = new Date(year, month, day);
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day';
-                dayElement.textContent = day;
-
-                // Check if today
-                if (day === currentDate.getDate() && 
-                    month === currentDate.getMonth() && 
-                    year === currentDate.getFullYear()) {
-                    dayElement.classList.add('today');
-                }
-
-                // Check if holiday
-                const holidayName = isHoliday(date);
-                if (holidayName) {
-                    dayElement.classList.add('holiday');
-                    const indicator = document.createElement('div');
-                    indicator.className = 'holiday-indicator';
-                    dayElement.appendChild(indicator);
-                    dayElement.title = holidayName;
-                }
-
-                calendarDays.appendChild(dayElement);
-            }
-
-            // Next month days
-            const totalCells = calendarDays.children.length;
-            const remainingCells = 42 - totalCells; // 6 weeks * 7 days
-            for (let day = 1; day <= remainingCells; day++) {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day other-month';
-                dayElement.textContent = day;
-                calendarDays.appendChild(dayElement);
-            }
-
-            updateHolidayInfo(month, year);
-        }
-
-        function updateHolidayInfo(month, year) {
-            const holidayInfo = document.getElementById('holiday-info');
-            const monthHolidays = [];
-            const yearHolidays = getHolidaysForYear(year);
-
-            for (const [dateStr, holidayName] of Object.entries(yearHolidays)) {
-                const date = new Date(dateStr);
-                if (date.getMonth() === month && date.getFullYear() === year) {
-                    monthHolidays.push({
-                        date: date.getDate(),
-                        name: holidayName
-                    });
-                }
-            }
-
-            if (monthHolidays.length > 0) {
-                let html = '<h4>🎉 Libur Nasional:</h4>';
-                monthHolidays.sort((a, b) => a.date - b.date);
-                monthHolidays.forEach(holiday => {
-                    html += `<div class="holiday-item">
-                        <span class="holiday-date">${holiday.date} ${monthNames[month]}</span> - ${holiday.name}
-                    </div>`;
-                });
-                holidayInfo.innerHTML = html;
-                holidayInfo.style.display = 'block';
-            } else {
-                holidayInfo.innerHTML = '<h4>Tidak ada libur nasional bulan ini</h4>';
-                holidayInfo.style.display = 'block';
-            }
-        }
-
-        function initCalendar() {
-            generateCalendar(displayMonth, displayYear);
-
-            // Toggle calendar visibility
-            const calendarToggle = document.getElementById('calendar-toggle');
-            const calendarContainer = document.getElementById('calendar-container');
-            const calendarOverlay = document.getElementById('calendar-overlay');
-            const calendarClose = document.getElementById('calendar-close');
-
-            function openCalendar() {
-                calendarContainer.classList.add('active');
-                calendarOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeCalendar() {
-                calendarContainer.classList.remove('active');
-                calendarOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            calendarToggle.addEventListener('click', openCalendar);
-            calendarClose.addEventListener('click', closeCalendar);
-            calendarOverlay.addEventListener('click', closeCalendar);
-
-            // Close on ESC key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && calendarContainer.classList.contains('active')) {
-                    closeCalendar();
-                }
-            });
-
-            document.getElementById('prev-month').addEventListener('click', () => {
-                displayMonth--;
-                if (displayMonth < 0) {
-                    displayMonth = 11;
-                    displayYear--;
-                }
-                generateCalendar(displayMonth, displayYear);
-            });
-
-            document.getElementById('next-month').addEventListener('click', () => {
-                displayMonth++;
-                if (displayMonth > 11) {
-                    displayMonth = 0;
-                    displayYear++;
-                }
-                generateCalendar(displayMonth, displayYear);
-            });
-        }
-
-        // Initialize on page load
-        init();
-        initCalendar();
+        btn.addEventListener('click', () => {
+            btn.disabled = true;
+            document.body.classList.add('blast');
+            setTimeout(() => {
+                document.body.classList.remove('blast');
+                btn.disabled = false;
+                after.textContent = lines[Math.min(count++, lines.length - 1)];
+            }, SONG_MS);
+        });
     </script>
 </body>
 </html>
